@@ -1,17 +1,5 @@
 {
   "name": "codespaces-demo",
-  "image": "reg1demo.azurecr.io/codespacetest:1",
+  "image": "mcr.microsoft.com/vscode/devcontainers/anaconda"
 
-  "initializeCommand": "/bin/sh -lc '[ -n \"$CONTAINER_REGISTRY\" ] && [ -n \"$CONTAINER_REGISTRY_USERNAME\" ] && [ -n \"$CONTAINER_REGISTRY_PASSWORD\" ] || { echo \"[devcontainer] Required secrets missing: ensure CONTAINER_REGISTRY, CONTAINER_REGISTRY_USERNAME, CONTAINER_REGISTRY_PASSWORD are set as Codespaces secrets.\" >&2; exit 1; }; echo \"$CONTAINER_REGISTRY_PASSWORD\" | docker login \"$CONTAINER_REGISTRY\" -u \"$CONTAINER_REGISTRY_USERNAME\" --password-stdin'",
-
-  "remoteEnv": {
-    "CONTAINER_REGISTRY": "${{secrets.CONTAINER_REGISTRY}}",
-    "CONTAINER_REGISTRY_USERNAME": "${{secrets.CONTAINER_REGISTRY_USERNAME}}",
-    "CONTAINER_REGISTRY_PASSWORD": "${{secrets.CONTAINER_REGISTRY_PASSWORD}}"
-  },
-
-  "features": {},
-  "customizations": {},
-  "postCreateCommand": "",
-  "remoteUser": "vscode"
 }
