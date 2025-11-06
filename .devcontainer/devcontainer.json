@@ -1,5 +1,40 @@
 {
-  "name": "codespaces-demo",
-  "image": "mcr.microsoft.com/vscode/devcontainers/anaconda"
-
+	"name": "AzDOps Demo DevContainer",
+	
+	// Use your Docker Hub image
+	"image": "danielchikamso/codespacetestdemo:1",
+	
+	// Alternative: If you want to build from Dockerfile instead
+	// "build": {
+	// 	"dockerfile": "../.vscode/Dockerfile.dockerfile",
+	// 	"context": ".."
+	// },
+	
+	// Features to add to the dev container
+	"features": {},
+	
+	// Configure tool-specific properties
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance"
+			],
+			"settings": {
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"python.linting.enabled": true,
+				"python.linting.pylintEnabled": true,
+				"python.formatting.provider": "black"
+			}
+		}
+	},
+	
+	// Use 'forwardPorts' to make a list of ports inside the container available locally
+	"forwardPorts": [8000],
+	
+	// Use 'postCreateCommand' to run commands after the container is created
+	// "postCreateCommand": "pip install -r requirements.txt",
+	
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root
+	"remoteUser": "vscode"
 }
