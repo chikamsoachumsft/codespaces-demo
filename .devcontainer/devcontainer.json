@@ -2,22 +2,16 @@
   "name": "codespaces-demo",
   "image": "reg1demo.azurecr.io/codespacetest:1",
 
-  // 1) Make the secrets available as env vars during startup
+  "initializeCommand": "/bin/sh -lc '[ -n \"$CONTAINER_REGISTRY\" ] && [ -n \"$CONTAINER_REGISTRY_USERNAME\" ] && [ -n \"$CONTAINER_REGISTRY_PASSWORD\" ] || { echo \"[devcontainer] Required secrets missing: ensure CONTAINER_REGISTRY, CONTAINER_REGISTRY_USERNAME, CONTAINER_REGISTRY_PASSWORD are set as Codespaces secrets.\" >&2; exit 1; }; echo \"$CONTAINER_REGISTRY_PASSWORD\" | docker login \"$CONTAINER_REGISTRY\" -u \"$CONTAINER_REGISTRY_USERNAME\" --password-stdin'",
+
   "remoteEnv": {
     "CONTAINER_REGISTRY": "${{secrets.CONTAINER_REGISTRY}}",
     "CONTAINER_REGISTRY_USERNAME": "${{secrets.CONTAINER_REGISTRY_USERNAME}}",
     "CONTAINER_REGISTRY_PASSWORD": "${{secrets.CONTAINER_REGISTRY_PASSWORD}}"
   },
 
-  // 2) Log in to ACR BEFORE the devcontainer engine pulls the base image
-  //    (initializeCommand runs on the host during setup)
-  "initializeCommand": "echo \"$CONTAINER_REGISTRY_PASSWORD\" | docker login \"$CONTAINER_REGISTRY\" -u \"$CONTAINER_REGISTRY_USERNAME\" --password-stdin || true",
-
-  // Optional: keep your features/customizations as needed
   "features": {},
   "customizations": {},
-
-  // Runs after the container is created (you can add your tooling here)
   "postCreateCommand": "",
   "remoteUser": "vscode"
 }
